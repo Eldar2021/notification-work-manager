@@ -10,7 +10,7 @@ Future<void> main() async {
   log('message');
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().initNotification();
-  await Workmanager().initialize(callbackDispatcher);
+  await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
   await Workmanager().registerPeriodicTask(
     "task-identifier",
     "simpleTask",
