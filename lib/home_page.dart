@@ -15,12 +15,12 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      Map<Permission, PermissionStatus> statuses = await [
-        Permission.notification,
-        Permission.ignoreBatteryOptimizations,
-        // Permission.ignoreBatteryOptimizations,
-      ].request();
-      log(statuses.toString());
+      // Map<Permission, PermissionStatus> statuses = await [
+      //   Permission.notification,
+      //   Permission.ignoreBatteryOptimizations,
+      //   // Permission.ignoreBatteryOptimizations,
+      // ].request();
+      // log(statuses.toString());
     });
   }
 
