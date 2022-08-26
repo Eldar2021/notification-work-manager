@@ -18,6 +18,7 @@ class _HomeViewState extends State<HomeView> {
       Map<Permission, PermissionStatus> statuses = await [
         Permission.notification,
         Permission.ignoreBatteryOptimizations,
+        // Permission.ignoreBatteryOptimizations,
       ].request();
       log(statuses.toString());
     });
