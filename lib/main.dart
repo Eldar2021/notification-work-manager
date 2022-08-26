@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:notification_work_manager/fetch_data.dart';
 import 'package:workmanager/workmanager.dart';
 
 import 'app.dart';
@@ -22,16 +23,18 @@ Future<void> main() async {
 
 Future<void> callbackDispatcher() async {
   Workmanager().executeTask((task, inputData) async {
-    for (var i = 0; i < 10; i++) {
-      await Future<void>.delayed(const Duration(seconds: 10));
-      await NotificationService().showNotification(i, 'Eldiyar', 'Sen jakshy adamsyng iygilik kaalaim saga!');
-    }
-    // while (true) {
-    //   await Future<void>.delayed(const Duration(seconds: 3));
-    //   await NotificationService().showNotification(1, 'Eldiyar', 'Sen jakshy adamsyng iygilik kaalaim saga!');
-    //   continue;
-    //   // return Future.value(true);
-    // }
+    final res = await fetchData();
+
+    res.fold(
+      (l) async {
+        await NotificationService().showNotification(0, 'Exception1', l.toString());
+      },
+      (r) async {
+        await NotificationService().showNotification(1, r.msg1.title, r.msg1.content);
+        await NotificationService().showNotification(2, r.msg2.title, r.msg2.content);
+      },
+    );
+
     return Future.value(true);
   });
 }
