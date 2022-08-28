@@ -48,7 +48,6 @@ Future<void> callbackDispatcher() async {
 Приветствую, в моем приложении мне нужно отправлять запрос к базе данных 2 раза в день и выдавать уведомление по response.
 Проблема в том, что коды Dart, которые я написал, должны работать, даже когда приложение закрыто. Я использовал фоновый сервис workmanager и flutter_local_notifications. В системе Android работает без проблем, а в системе IOS постоянно вызывает проблемы. Как я могу сделать так, чтобы все работало как я хочу как для Android, так и для iOS?
 
-
 Hello, in my application I need to send a request to the database 2 times a day and issue a notification on the response.
 The problem is that the Dart codes I wrote should work even when the app is closed. I used workmanager background service and flutter_local_notifications. On the Android system, it works without problems, but on the IOS system, it constantly causes problems. How can I make things work the way I want for both Android and iOS?
 
