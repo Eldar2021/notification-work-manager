@@ -1,7 +1,9 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:auto_start_flutter/auto_start_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -16,8 +18,18 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       log('bastaldy');
-      await getAutoStartPermission();
-      // await NotificationService().requestPermission();
+      if (Platform.isAndroid) {
+        try {
+          //check auto-start availability.
+          var test = await (isAutoStartAvailable);
+          log(test.toString());
+          //if available then navigate to auto-start setting page.
+          if (test != null && !test) await getAutoStartPermission();
+        } on PlatformException catch (e) {
+          log(e.toString());
+        }
+        if (!mounted) return;
+      }
     });
   }
 
