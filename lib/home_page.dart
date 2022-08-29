@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:auto_start_flutter/auto_start_flutter.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -12,12 +15,9 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // Map<Permission, PermissionStatus> statuses = await [
-      //   Permission.notification,
-      //   Permission.ignoreBatteryOptimizations,
-      //   // Permission.ignoreBatteryOptimizations,
-      // ].request();
-      // log(statuses.toString());
+      log('bastaldy');
+      await getAutoStartPermission();
+      // await NotificationService().requestPermission();
     });
   }
 
@@ -27,8 +27,13 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         title: const Text('HomeView'),
       ),
-      body: const Center(
-        child: Text('HomeView'),
+      body: Column(
+        children: [
+          TextButton(
+            onPressed: () {},
+            child: const Text('Open App Settings'),
+          ),
+        ],
       ),
     );
   }

@@ -1,15 +1,17 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {
+  NotificationService._internal([FlutterLocalNotificationsPlugin? plugin])
+      : _flutterLocalNotificationsPlugin = plugin ?? FlutterLocalNotificationsPlugin();
+
+  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+
   static final NotificationService _notificationService = NotificationService._internal();
 
-  factory NotificationService() {
-    return _notificationService;
-  }
-
-  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-  NotificationService._internal();
+  factory NotificationService() => _notificationService;
 
   Future<void> initNotification() async {
     // Android initialization
@@ -28,11 +30,11 @@ class NotificationService {
     );
 
     // the initialization settings are initialized after they are setted
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
   Future<void> showNotification(int id, String title, String body) async {
-    await flutterLocalNotificationsPlugin.show(
+    await _flutterLocalNotificationsPlugin.show(
       id,
       title,
       body,
@@ -54,5 +56,12 @@ class NotificationService {
         ),
       ),
     );
+  }
+
+  Future<void> requestPermission() async {
+    if (Platform.isAndroid) {
+      final val = await AndroidFlutterLocalNotificationsPlugin().requestPermission();
+      log('requestPermission $val');
+    }
   }
 }

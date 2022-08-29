@@ -11,7 +11,7 @@ import 'notification_service.dart';
 Future<void> main() async {
   log('message');
   WidgetsFlutterBinding.ensureInitialized();
-  // await NotificationService().initNotification();
+  await NotificationService().initNotification();
   if (Platform.isAndroid) {
     await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
     await Workmanager().registerPeriodicTask(
