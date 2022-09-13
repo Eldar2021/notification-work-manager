@@ -27,18 +27,11 @@ Future<void> main() async {
 
 Future<void> callbackDispatcher() async {
   Workmanager().executeTask((task, inputData) async {
-    final res = await fetchData();
-    res.fold(
-      (l) async {
-        log(l.toString());
-        await NotificationService().showNotification(0, 'Exception1', l.toString());
-      },
-      (r) async {
-        log(r.toString());
-        await NotificationService().showNotification(1, r.msg1.title, r.msg1.content);
-        await NotificationService().showNotification(2, r.msg2.title, r.msg2.content);
-      },
-    );
+    final res = await FeedRepo().fetchData();
+    if (res != null) {
+      await NotificationService().showNotification(1, res.msg1.title, res.msg1.content);
+      await NotificationService().showNotification(2, res.msg2.title, res.msg2.content);
+    }
 
     return Future.value(true);
   });
