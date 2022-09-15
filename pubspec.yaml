@@ -18,7 +18,7 @@ dependencies:
   http: ^0.13.5
   dartz: ^0.10.1
   permission_handler: ^10.0.0
-  auto_start_flutter: ^0.1.0
+  # auto_start_flutter: ^0.1.0
 
 dev_dependencies:
   flutter_test:
